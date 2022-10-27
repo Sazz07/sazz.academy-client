@@ -20,7 +20,6 @@ Hosted in firebase -> [Sazz Academy](https://sazz-academy.web.app/)
 * Also used react toastify,
 HeroIcons.
 * I have used React Router.
-* Used React Recharts for making the Statistics Page.
 * I have also used conditional rendering.
 * I have used firebase.
 
