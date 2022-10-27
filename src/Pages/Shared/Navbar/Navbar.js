@@ -25,7 +25,7 @@ const Navbar = () => {
                                 title='home'
                                 className={({ isActive }) =>
                                     isActive
-                                        ? 'font-medium tracking-wide text-emerald-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                                        ? 'font-medium tracking-wide text-violet-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                         : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                 }
                             >
@@ -39,7 +39,7 @@ const Navbar = () => {
                                 title='Courses'
                                 className={({ isActive }) =>
                                     isActive
-                                        ? 'font-medium tracking-wide text-emerald-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                                        ? 'font-medium tracking-wide text-violet-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                         : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                 }
                             >
@@ -53,7 +53,7 @@ const Navbar = () => {
                                 title='FAQ'
                                 className={({ isActive }) =>
                                     isActive
-                                        ? 'font-medium tracking-wide text-emerald-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                                        ? 'font-medium tracking-wide text-violet-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                         : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                 }
                             >
@@ -67,7 +67,7 @@ const Navbar = () => {
                                 title='Blog'
                                 className={({ isActive }) =>
                                     isActive
-                                        ? 'font-medium tracking-wide text-emerald-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                                        ? 'font-medium tracking-wide text-violet-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                         : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                 }
                             >
@@ -88,7 +88,7 @@ const Navbar = () => {
                                 title='Login'
                                 className={({ isActive }) =>
                                     isActive
-                                        ? 'font-medium tracking-wide text-emerald-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                                        ? 'font-medium tracking-wide text-violet-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                         : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                 }
                             >
@@ -102,7 +102,7 @@ const Navbar = () => {
                                 title='Signup'
                                 className={({ isActive }) =>
                                     isActive
-                                        ? 'font-medium tracking-wide text-emerald-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                                        ? 'font-medium tracking-wide text-violet-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                         : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
                                 }
                             >
