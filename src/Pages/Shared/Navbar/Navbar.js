@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import { FaBook } from "react-icons/fa";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,7 +24,7 @@ const Navbar = () => {
                         className='inline-flex items-center'
                     >
                         <span className='ml-2 text-xl font-bold tracking-wide text-gray-800'>
-                            SazzAcademy
+                           <FaBook className='inline text-orange-400'></FaBook>  SazzAcademy
                         </span>
                     </Link>
                     <ul className='flex items-center hidden space-x-8 lg:flex'>
