@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 const Signup = () => {
     const [error, setError] = useState();
-    const { createUser, updateUserProfile, verifyEmail, signInWithGoogle, check, handleCheck } = useContext(AuthContext);
+    const { createUser, updateUserProfile, verifyEmail, signInWithGoogle, check, handleCheck, signInWithGithub } = useContext(AuthContext);
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -65,6 +65,16 @@ const Signup = () => {
             })
             .catch(error => console.error(error));
     }
+
+    // github signin
+    const handleGithubSignIn = () => {
+        signInWithGithub()
+            .then(result => {
+                console.log(result.user);
+                navigate(from, { replace: true });
+            })
+            .catch(error => console.error(error));
+    }
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
             <div className='hidden sm:block'>
@@ -80,7 +90,7 @@ const Signup = () => {
                     </div>
                     <div className='flex justify-between pt-4'>
                         <button onClick={handleGoogleSignIn} type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGoogle className='inline'></FaGoogle> Google</button>
-                        <button type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGithub className='inline'></FaGithub> Github</button>
+                        <button onClick={handleGithubSignIn} type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGithub className='inline'></FaGithub> Github</button>
                     </div>
                     <div className="flex items-center pt-4 space-x-1">
                         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>

@@ -10,7 +10,7 @@ const Login = () => {
 
     const [error, setError] = useState('');
     const { signIn, setLoading, signInWithGoogle, check,
-        handleCheck, } = useContext(AuthContext);
+        handleCheck, signInWithGithub } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -46,9 +46,20 @@ const Login = () => {
                 setLoading(false);
             })
     }
+    
 
     const handleGoogleSignIn = () => {
         signInWithGoogle()
+            .then(result => {
+                console.log(result.user);
+                navigate(from, { replace: true });
+            })
+            .catch(error => console.error(error));
+    }
+
+      // github signin
+      const handleGithubSignIn = () => {
+        signInWithGithub()
             .then(result => {
                 console.log(result.user);
                 navigate(from, { replace: true });
@@ -72,7 +83,7 @@ const Login = () => {
                     </div>
                     <div className='flex justify-between pt-4'>
                         <button onClick={handleGoogleSignIn} type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGoogle className='inline'></FaGoogle> Google</button>
-                        <button type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGithub className='inline'></FaGithub> Github</button>
+                        <button onClick={handleGithubSignIn} type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGithub className='inline'></FaGithub> Github</button>
                     </div>
                     <div className="flex items-center pt-4 space-x-1">
                         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
