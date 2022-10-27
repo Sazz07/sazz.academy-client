@@ -24,7 +24,7 @@ const Navbar = () => {
                         className='inline-flex items-center'
                     >
                         <span className='ml-2 text-xl font-bold tracking-wide text-gray-800'>
-                           <FaBook className='inline text-orange-400'></FaBook>  SazzAcademy
+                            <FaBook className='inline text-orange-400'></FaBook>  SazzAcademy
                         </span>
                     </Link>
                     <ul className='flex items-center hidden space-x-8 lg:flex'>
@@ -101,7 +101,7 @@ const Navbar = () => {
                                         </div>
                                     </li>
                                     <li>
-                                        <Link className='' title='Profile'>
+                                        <Link className='' title={user?.displayName}>
                                             {user?.photoURL ?
                                                 <img alt="" className="w-10 h-10 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 ring-violet-400 ring-offset-gray-800" src={user?.photoURL} />
                                                 :
@@ -235,7 +235,14 @@ const Navbar = () => {
                                                             </div>
                                                         </li>
                                                         <li>
-                                                            <img alt="" className="w-10 h-10 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 ring-green-600 ring-offset-gray-800" src="https://i.ibb.co/64xqzfP/dummy-user.png" />
+                                                            <Link className='' title={user?.displayName}>
+                                                                {user?.photoURL ?
+                                                                    <img alt="" className="w-10 h-10 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 ring-violet-400 ring-offset-gray-800" src={user?.photoURL} />
+                                                                    :
+                                                                    <img alt="" className="w-10 h-10 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 ring-green-600 ring-offset-gray-800" src="https://i.ibb.co/64xqzfP/dummy-user.png" />
+                                                                }
+
+                                                            </Link>
                                                         </li>
                                                     </>
                                                     :

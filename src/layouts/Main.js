@@ -7,9 +7,9 @@ import Header from '../Pages/Header/Header';
 const Main = () => {
     const {check} = useContext(AuthContext);
     return (
-        <div className={!check ? "bg-gray-200" : "bg-gray-600"}>
+        <div className={!check ? "bg-gray-100" : "bg-gray-600"}>
             <Header></Header>
-            <Outlet className={!check ? "bg-gray-200" : "bg-gray-600"}></Outlet>
+            <Outlet></Outlet>
         </div>
     );
 };
