@@ -9,7 +9,8 @@ import { toast } from 'react-toastify';
 const Login = () => {
 
     const [error, setError] = useState('');
-    const { signIn, setLoading, signInWithGoogle } = useContext(AuthContext);
+    const { signIn, setLoading, signInWithGoogle, check,
+        handleCheck, } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -84,12 +85,12 @@ const Login = () => {
                     </div>
                     <div className='flex flex-col text-gray-600 py-2'>
                         <label>Password</label>
-                        <input className='p-2 shadow-sm rounded-lg bg-fuchsia-100 mt-2 focus:border-blue-500 focus:bg-gray-200 focus:outline-none' type="password" name='password' placeholder='Please Enter Your Password' required />
+                        <input className='p-2 shadow-sm rounded-lg bg-fuchsia-100 mt-2 focus:border-blue-500 focus:bg-gray-200 focus:outline-none' type={!check ? "password" : "text"} name='password' placeholder='Please Enter Your Password' required />
                     </div>
                     <div className='text-gray-600 py-2'>
-                        <p className=''><input className='mr-2' type="checkbox" />Show Password</p>
+                        <p className=''><input onClick={handleCheck} className='mr-2' type="checkbox" />Show Password</p>
                     </div>
-                    <button className='w-full my-5 py-2 bg-violet-500 hover:bg-violet-700 text-white font-semibold rounded-lg' type='submit'>Log In</button>
+                    <button className='w-full my-5 py-2 bg-violet-500 hover:bg-violet-700 text-white font-semibold rounded-lg' type='submit' disabled={!check}>Log In</button>
                     <p className='text-red-500 font-medium text-center'>{error}</p>
                     <p className="text-xs text-center sm:px-6 dark:text-gray-400">Don't have an account?
                         <Link to='/signup' className="underline dark:text-gray-100"> Sign up</Link>

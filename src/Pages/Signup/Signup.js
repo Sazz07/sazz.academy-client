@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 const Signup = () => {
     const [error, setError] = useState();
-    const { createUser, updateUserProfile, verifyEmail, signInWithGoogle } = useContext(AuthContext);
+    const { createUser, updateUserProfile, verifyEmail, signInWithGoogle, check, handleCheck } = useContext(AuthContext);
 
     const navigate = useNavigate()
     const location = useLocation()
@@ -101,14 +101,14 @@ const Signup = () => {
                     </div>
                     <div className='flex flex-col text-gray-600 py-2'>
                         <label>Password</label>
-                        <input className='p-2 shadow-sm rounded-lg bg-fuchsia-100 mt-2 focus:border-blue-500 focus:bg-gray-200 focus:outline-none' type="password" name='password' placeholder='Enter Your Password' required />
+                        <input className='p-2 shadow-sm rounded-lg bg-fuchsia-100 mt-2 focus:border-blue-500 focus:bg-gray-200 focus:outline-none' type={!check ? "password" : "text"} name='password' placeholder='Enter Your Password' required />
                     </div>
                     <div className='text-gray-600 py-2'>
-                        <p className=''><input className='mr-2' type="checkbox" />Show Password</p>
-                        <p className=''><input className='mr-2' type="checkbox" />Accept Terms & Conditions</p>
+                        <p className=''><input onClick={handleCheck} className='mr-2' type="checkbox" />Show Password</p>
+                        <p className=''><input onClick={handleCheck} className='mr-2' type="checkbox" />Accept Terms & Conditions</p>
                     </div>
-                    <button className='w-full my-5 py-2 bg-violet-500 hover:bg-violet-700 text-white font-semibold rounded-lg' type='submit'>Sign Up</button>
-                    <p>{error}</p>
+                    <button className='w-full my-5 py-2 bg-violet-500 text-white font-semibold rounded-lg' type='submit' disabled={!check}>Sign Up</button>
+                    <p className='text-center text-red-600 font-medium'>{error}</p>
                     <p className="text-xs text-center sm:px-6 dark:text-gray-400">Already have an account?
                         <Link to='/login' className="underline dark:text-gray-100"> Log in</Link>
                     </p>

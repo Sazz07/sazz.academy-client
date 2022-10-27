@@ -43,17 +43,17 @@ export const routes = createBrowserRouter([
             },
             {
                 path: '/courses',
-                loader: () => fetch('http://localhost:5000/courses-categories'),
+                loader: () => fetch('https://assignment-10-server-theta-five.vercel.app/courses-categories'),
                 element: <Courses></Courses>
             },
             {
                 path: '/category/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`),
+                loader: ({ params }) => fetch(`https://assignment-10-server-theta-five.vercel.app/category/${params.id}`),
                 element: <Category></Category>
             },
             {
                 path: '/courses/:id',
-                loader: ({params}) => fetch(`http://localhost:5000/courses/${params.id}`) ,
+                loader: ({params}) => fetch(`https://assignment-10-server-theta-five.vercel.app/courses/${params.id}`) ,
                 element: <PrivateRoute><Checkout></Checkout></PrivateRoute>
             }
         ]

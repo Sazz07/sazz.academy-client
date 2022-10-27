@@ -13,6 +13,14 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    // Checking state for toggle
+
+    const [check, setCheck] = useState(false);
+
+    const handleCheck = event => {
+        setCheck(event.target.checked);
+    };
+
     const createUser = (email, password) => {
         setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
@@ -66,7 +74,9 @@ const AuthProvider = ({ children }) => {
         verifyEmail,
         signIn,
         signInWithGoogle,
-        logOut
+        logOut,
+        check,
+        handleCheck,
     }
 
     return (

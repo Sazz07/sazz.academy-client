@@ -4,7 +4,7 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut, check, handleCheck } = useContext(AuthContext);
 
     const handleLogOut = () => {
         logOut()
@@ -13,7 +13,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='bg-gray-200'>
+        <div className={!check ? "bg-gray-200" : "bg-gray-400"}>
             <div className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
                 <div className='relative flex items-center justify-between'>
                     <Link
@@ -85,7 +85,7 @@ const Navbar = () => {
                         </li>
                         <li>
                             <label htmlFor="Toggle4" className="inline-flex items-center p-1 cursor-pointer bg-gray-300 text-gray-800 rounded-lg">
-                                <input id="Toggle4" type="checkbox" className="hidden peer" />
+                                <input onClick={handleCheck} id="Toggle4" type="checkbox" className="hidden peer" />
                                 <span className="px-4 py-2 rounded-lg bg-gray-500 peer-checked:bg-gray-300">Light</span>
                                 <span className="px-4 py-2 rounded-lg bg-gray-300 peer-checked:bg-violet-500">Dark</span>
                             </label>
