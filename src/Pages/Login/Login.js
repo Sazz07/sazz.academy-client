@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { useState } from 'react';
 import { useContext } from 'react';
@@ -9,6 +9,10 @@ const Login = () => {
 
     const [error, setError] = useState('');
     const { signIn, setLoading } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -24,11 +28,20 @@ const Login = () => {
                 console.log(user);
                 form.reset();
                 setError('');
+                if(user.emailVerified){
+                    navigate(from, {replace: true});
+                }
+                else {
+                    alert('Your Email is not Verified. Please verify your Email');
+                }
 
             })
             .catch(error => {
                 console.error(error);
                 setError(error.message)
+            })
+            .finally(() => {
+                setLoading(false);
             })
     }
 

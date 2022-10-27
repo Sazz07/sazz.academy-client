@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const {user, logOut} = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+        .then( () => {})
+        .catch(error => console.error(error))
+    }
+
     return (
         <div className='bg-gray-200'>
             <div className='px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8'>
@@ -100,14 +109,19 @@ const Navbar = () => {
                                 to='/signup'
                                 aria-label='Signup'
                                 title='Signup'
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? 'font-medium tracking-wide text-violet-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
-                                        : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
-                                }
                             >
-                                <button type="button" className="px-8 py-3 font-semibold rounded-lg bg-violet-400 text-gray-700">Sign Up</button>
+                                <button type="button" className="px-4 py-2 font-semibold rounded-lg bg-violet-400 text-gray-700">Sign Up</button>
                             </NavLink>
+                        </li>
+                        <li>
+                            <div title='Log Out'>
+                                <button onClick={handleLogOut} type="button" className="px-4 py-2 font-semibold rounded-lg bg-rose-400 text-gray-700">Log Out</button>
+                            </div>
+                        </li>
+                        <li>
+                            <Link className='' title='Profile'>
+                                <img alt="" className="w-12 h-12 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 ring-violet-400 ring-offset-gray-800" src="https://source.unsplash.com/40x40/?portrait?1" />
+                            </Link>
                         </li>
                     </ul>
                     <div className='lg:hidden'>
@@ -215,6 +229,11 @@ const Navbar = () => {
                                                 >
                                                     Sign up
                                                 </Link>
+                                            </li>
+                                            <li>
+                                                <div title='Log Out'>
+                                                    <button type="button" className="px-4 py-2 font-semibold rounded-lg bg-rose-400 text-gray-700">Log Out</button>
+                                                </div>
                                             </li>
                                         </ul>
                                     </nav>
