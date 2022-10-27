@@ -6,7 +6,7 @@ It is SPA app which is build in React and React Router Dom and firebase.
 
 ## Live Link
 
-Hosted in Netlify -> [Sazz Academy](https://sazz-academy.web.app/)
+Hosted in firebase -> [Sazz Academy](https://sazz-academy.web.app/)
 
 ## Git Link 
 
