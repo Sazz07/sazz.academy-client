@@ -4,12 +4,12 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const {user, logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
     const handleLogOut = () => {
         logOut()
-        .then( () => {})
-        .catch(error => console.error(error))
+            .then(() => { })
+            .catch(error => console.error(error))
     }
 
     return (
@@ -90,39 +90,53 @@ const Navbar = () => {
                                 <span className="px-4 py-2 rounded-lg bg-gray-300 peer-checked:bg-violet-500">Dark</span>
                             </label>
                         </li>
-                        <li>
-                            <NavLink
-                                to='/login'
-                                aria-label='Login'
-                                title='Login'
-                                className={({ isActive }) =>
-                                    isActive
-                                        ? 'font-medium tracking-wide text-violet-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
-                                        : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
-                                }
-                            >
-                                Log in
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to='/signup'
-                                aria-label='Signup'
-                                title='Signup'
-                            >
-                                <button type="button" className="px-4 py-2 font-semibold rounded-lg bg-violet-400 text-gray-700">Sign Up</button>
-                            </NavLink>
-                        </li>
-                        <li>
-                            <div title='Log Out'>
-                                <button onClick={handleLogOut} type="button" className="px-4 py-2 font-semibold rounded-lg bg-rose-400 text-gray-700">Log Out</button>
-                            </div>
-                        </li>
-                        <li>
-                            <Link className='' title='Profile'>
-                                <img alt="" className="w-12 h-12 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 ring-violet-400 ring-offset-gray-800" src="https://source.unsplash.com/40x40/?portrait?1" />
-                            </Link>
-                        </li>
+                        {
+                            user?.uid
+                                ?
+                                <>
+                                    <li>
+                                        <div title='Log Out'>
+                                            <button onClick={handleLogOut} type="button" className="px-4 py-2 font-semibold rounded-lg bg-rose-400 text-gray-700">Log Out</button>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <Link className='' title='Profile'>
+                                            {user?.photoURL ?
+                                                <img alt="" className="w-10 h-10 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 ring-violet-400 ring-offset-gray-800" src={user?.photoURL} />
+                                                :
+                                                <img alt="" className="w-10 h-10 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 ring-green-600 ring-offset-gray-800" src="https://i.ibb.co/64xqzfP/dummy-user.png" />
+                                            }
+
+                                        </Link>
+                                    </li>
+                                </>
+                                :
+                                <>
+                                    <li>
+                                        <NavLink
+                                            to='/login'
+                                            aria-label='Login'
+                                            title='Login'
+                                            className={({ isActive }) =>
+                                                isActive
+                                                    ? 'font-medium tracking-wide text-violet-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                                                    : 'font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                                            }
+                                        >
+                                            Log in
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink
+                                            to='/signup'
+                                            aria-label='Signup'
+                                            title='Signup'
+                                        >
+                                            <button type="button" className="px-4 py-2 font-semibold rounded-lg bg-violet-400 text-gray-700">Sign Up</button>
+                                        </NavLink>
+                                    </li>
+                                </>
+                        }
                     </ul>
                     <div className='lg:hidden'>
                         <button
@@ -210,31 +224,45 @@ const Navbar = () => {
                                                     Blog
                                                 </Link>
                                             </li>
-                                            <li>
-                                                <Link
-                                                    to='/login'
-                                                    aria-label='Login'
-                                                    title='Login'
-                                                    className='font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
-                                                >
-                                                    Log in
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <Link
-                                                    to='/signup'
-                                                    aria-label='Signup'
-                                                    title='Signup'
-                                                    className='font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
-                                                >
-                                                    Sign up
-                                                </Link>
-                                            </li>
-                                            <li>
-                                                <div title='Log Out'>
-                                                    <button type="button" className="px-4 py-2 font-semibold rounded-lg bg-rose-400 text-gray-700">Log Out</button>
-                                                </div>
-                                            </li>
+                                            {
+                                                user?.uid
+                                                    ?
+                                                    <>
+                                                        <li>
+                                                            <div title='Log Out'>
+                                                                <button type="button" className="px-4 py-2 font-semibold rounded-lg bg-rose-400 text-gray-700">Log Out</button>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <img alt="" className="w-10 h-10 rounded-full ring-2 ring-offset-4 dark:bg-gray-500 ring-green-600 ring-offset-gray-800" src="https://i.ibb.co/64xqzfP/dummy-user.png" />
+                                                        </li>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <li>
+                                                            <Link
+                                                                to='/login'
+                                                                aria-label='Login'
+                                                                title='Login'
+                                                                className='font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                                                            >
+                                                                Log in
+                                                            </Link>
+                                                        </li>
+                                                        <li>
+                                                            <Link
+                                                                to='/signup'
+                                                                aria-label='Signup'
+                                                                title='Signup'
+                                                                className='font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400'
+                                                            >
+                                                                <button className='px-4 py-2 font-semibold rounded-lg bg-violet-400 text-gray-700"'>Sign up</button>
+                                                            </Link>
+                                                        </li>
+                                                    </>
+                                            }
+
+
                                         </ul>
                                     </nav>
                                 </div>
