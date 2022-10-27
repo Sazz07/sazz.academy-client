@@ -4,11 +4,12 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 import { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
     const [error, setError] = useState('');
-    const { signIn, setLoading } = useContext(AuthContext);
+    const { signIn, setLoading, signInWithGoogle } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -28,11 +29,11 @@ const Login = () => {
                 console.log(user);
                 form.reset();
                 setError('');
-                if(user.emailVerified){
-                    navigate(from, {replace: true});
+                if (user.emailVerified) {
+                    navigate(from, { replace: true });
                 }
                 else {
-                    alert('Your Email is not Verified. Please verify your Email');
+                    toast.error('Your Email is not Verified. Please verify your Email');
                 }
 
             })
@@ -43,6 +44,15 @@ const Login = () => {
             .finally(() => {
                 setLoading(false);
             })
+    }
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(result => {
+                console.log(result.user);
+                navigate(from, { replace: true });
+            })
+            .catch(error => console.error(error));
     }
 
     return (
@@ -60,7 +70,7 @@ const Login = () => {
                         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
                     </div>
                     <div className='flex justify-between pt-4'>
-                        <button type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGoogle className='inline'></FaGoogle> Google</button>
+                        <button onClick={handleGoogleSignIn} type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGoogle className='inline'></FaGoogle> Google</button>
                         <button type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGithub className='inline'></FaGithub> Github</button>
                     </div>
                     <div className="flex items-center pt-4 space-x-1">

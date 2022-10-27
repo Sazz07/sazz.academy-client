@@ -1,13 +1,15 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { createContext } from 'react';
-import { getAuth, createUserWithEmailAndPassword, updateProfile, sendEmailVerification, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
+import { getAuth, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile, sendEmailVerification, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'firebase/auth'
 import app from '../../firebase/firebase.config';
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
+    const googleProvider = new GoogleAuthProvider();
+
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -28,6 +30,13 @@ const AuthProvider = ({ children }) => {
     const verifyEmail = () => {
         return sendEmailVerification(auth.currentUser);
     };
+
+    // Goggle Authentication
+
+    const signInWithGoogle = () => {
+        setLoading(true);
+        return signInWithPopup(auth, googleProvider);
+    }
 
     const logOut = () => {
         setLoading(true);
@@ -56,6 +65,7 @@ const AuthProvider = ({ children }) => {
         updateUserProfile,
         verifyEmail,
         signIn,
+        signInWithGoogle,
         logOut
     }
 

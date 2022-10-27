@@ -1,13 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaGithub } from "react-icons/fa";
 import { useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Signup = () => {
     const [error, setError] = useState();
-    const { createUser, updateUserProfile, verifyEmail } = useContext(AuthContext);
+    const { createUser, updateUserProfile, verifyEmail, signInWithGoogle } = useContext(AuthContext);
+
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -26,7 +31,7 @@ const Signup = () => {
                 setError('');
                 handleUpdateUserProfile(name, photoURL);
                 handleEmailVerification();
-                alert('Please Verify Your Email Address.');
+                toast.info('Please Verify Your Email Address.');
             })
             .catch(error => {
                 console.error(error);
@@ -49,6 +54,17 @@ const Signup = () => {
             .then(() => { })
             .catch(error => console.error(error));
     }
+
+    // Google Sign in
+
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(result => {
+                console.log(result.user);
+                navigate(from, { replace: true });
+            })
+            .catch(error => console.error(error));
+    }
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
             <div className='hidden sm:block'>
@@ -63,7 +79,7 @@ const Signup = () => {
                         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
                     </div>
                     <div className='flex justify-between pt-4'>
-                        <button type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGoogle className='inline'></FaGoogle> Google</button>
+                        <button onClick={handleGoogleSignIn} type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGoogle className='inline'></FaGoogle> Google</button>
                         <button type="button" className="px-8 py-3 font-semibold border rounded border-gray-700 text-gray-700 hover:bg-gray-400"><FaGithub className='inline'></FaGithub> Github</button>
                     </div>
                     <div className="flex items-center pt-4 space-x-1">
@@ -77,7 +93,7 @@ const Signup = () => {
                     </div>
                     <div className='flex flex-col text-gray-600 py-2'>
                         <label>Photo URL</label>
-                        <input className='rounded-lg shadow-sm bg-fuchsia-100 mt-2 p-2 focus:border-blue-500 focus:bg-gray-200 focus:outline-none' type="text" name='photoURL' placeholder='Enter Your Photo URL' required />
+                        <input className='rounded-lg shadow-sm bg-fuchsia-100 mt-2 p-2 focus:border-blue-500 focus:bg-gray-200 focus:outline-none' type="text" name='photoURL' placeholder='Enter Your Photo URL' />
                     </div>
                     <div className='flex flex-col text-gray-600 py-2'>
                         <label>Email</label>
@@ -96,7 +112,6 @@ const Signup = () => {
                     <p className="text-xs text-center sm:px-6 dark:text-gray-400">Already have an account?
                         <Link to='/login' className="underline dark:text-gray-100"> Log in</Link>
                     </p>
-
                 </form>
             </div>
         </div>
