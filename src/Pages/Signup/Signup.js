@@ -28,9 +28,9 @@ const Signup = () => {
                 handleEmailVerification();
                 alert('Please Verify Your Email Address.');
             })
-            .catch(e => {
-                console.error(e);
-                setError(e.message);
+            .catch(error => {
+                console.error(error);
+                setError(error.message);
             });
     }
 

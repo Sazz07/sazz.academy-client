@@ -1,8 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaGoogle, FaGithub } from "react-icons/fa";
+import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
+
+    const [error, setError] = useState('');
+    const { signIn, setLoading } = useContext(AuthContext);
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        console.log(email, password);
+
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+                setError('');
+
+            })
+            .catch(error => {
+                console.error(error);
+                setError(error.message)
+            })
+    }
+
     return (
         <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
             <div className='hidden sm:block'>
@@ -10,7 +39,7 @@ const Login = () => {
             </div>
 
             <div className='bg-gray-100 flex flex-col justify-center'>
-                <form className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-300 p-8 px-8 shadow-lg'>
+                <form onSubmit={handleSubmit} className='max-w-[400px] w-full mx-auto rounded-lg bg-gray-300 p-8 px-8 shadow-lg'>
                     <h2 className='text-4xl dark:text-white font-bold text-center'>Log In</h2>
                     <div className="flex items-center pt-4 space-x-1">
                         <div className="flex-1 h-px sm:w-16 bg-gray-700"></div>
@@ -38,6 +67,7 @@ const Login = () => {
                         <p className=''><input className='mr-2' type="checkbox" />Show Password</p>
                     </div>
                     <button className='w-full my-5 py-2 bg-violet-500 hover:bg-violet-700 text-white font-semibold rounded-lg' type='submit'>Log In</button>
+                    <p className='text-red-500 font-medium text-center'>{error}</p>
                     <p className="text-xs text-center sm:px-6 dark:text-gray-400">Don't have an account?
                         <Link to='/signup' className="underline dark:text-gray-100"> Sign up</Link>
                     </p>
